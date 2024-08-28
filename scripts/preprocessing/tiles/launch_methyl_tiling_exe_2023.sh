@@ -1,7 +1,7 @@
 #!/bin/bash -l
 #Usage # sbatch [this script]
 #Name of the job
-#SBATCH --job-name=methTiling
+#SBATCH --job-name=tiling2023
 #SBATCH -N 1
 #SBATCH --mail-user=guillem.santamaria@uni.lu
 #SBATCH --mail-type=begin,end,fail
@@ -10,9 +10,9 @@
 #SBATCH -c 4
 #SBATCH --time=01-00:30:00
 #Define sdout path
-#SBATCH --output=/home/users/gsantamaria/projects/car_t/scripts/output_methyl_tiling.txt
+#SBATCH --output=/home/users/gsantamaria/projects/car_t/scripts/preprocessing/tiles/output_methyl_tiling_2023.txt
 #Define sderr path
-#SBATCH --error=/home/users/gsantamaria/projects/car_t/scripts/error_methyl_tiling.txt
+#SBATCH --error=/home/users/gsantamaria/projects/car_t/scripts/preprocessing/tiles/error_methyl_tiling_2023.txt
 #Define the queue (Quality Of Service) to which the task shall be submitted to
 #SBATCH -p bigmem
 #SBATCH --qos=normal
@@ -23,12 +23,12 @@ conda activate r-4.3.1
 ########################################################################################################################
 
 urlsFile="/home/users/gsantamaria/projects/car_t/data/PrjCellEx2024_COV_links.txt"
-wgbsDir="projects/car_t/data/epigen/bismark_res/2024/new/"
+wgbsDir="/home/users/gsantamaria/projects/car_t/data/wgbs/"
 tileSize=100
 minCov=5
 minCpGs_inTile=5
-outName="car_t_2024_new"
-outDir="/home/users/gsantamaria/projects/car_t/results/preprocessing/"
+outName="car_t_2023"
+outDir="/home/users/gsantamaria/projects/car_t/results/preprocessing/tile_2023/"
 
 #Rscript dwnld_files_from_tab.R $urlsFile --expName $outName --outDir $wgbsDir
 

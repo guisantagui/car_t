@@ -48,22 +48,36 @@ parser <- add_argument(parser = parser,
 
 parsed <- parse_args(parser)
 
-# Directory stuff
+# Functions
 ################################################################################
 
-wgbsDir <- parsed$wgbsDir
-tileSize <- as.numeric(parsed$tileSize)
-minCov <- as.numeric(parsed$minCov)
-minCpGs_inTile <- as.numeric(parsed$minCpGs_inTile)
-outName <- parsed$outName
-remPrevFile <- parsed$remPrevFile
-outDir <- parsed$outDir
-
+# Create directory if it doesn't exist
 createIfNot <- function(pth){
         if(!dir.exists(pth)){
                 dir.create(pth, recursive = T)
         }
 }
+
+# Add a / if it's not at the end of a directory string
+addSlashIfNot <- function(pth){
+        lastChar <- substr(pth, nchar(pth), nchar(pth))
+        if(lastChar != "/"){
+                pth <- paste0(pth, "/")
+        }
+        return(pth)
+}
+
+# Directory stuff
+################################################################################
+
+wgbsDir <- addSlashIfNot(parsed$wgbsDir)
+tileSize <- as.numeric(parsed$tileSize)
+minCov <- as.numeric(parsed$minCov)
+minCpGs_inTile <- as.numeric(parsed$minCpGs_inTile)
+outName <- parsed$outName
+remPrevFile <- parsed$remPrevFile
+outDir <- addSlashIfNot(parsed$outDir)
+
 
 createIfNot(outDir)
 
@@ -83,8 +97,8 @@ wgbsFiles <- wgbsFiles[grepl(".cov.gz",
                              wgbsFiles,
                              fixed = T)]
 
-wgbsFiles <- wgbsFiles[!grepl("CD8-Mock-8-69.deduplicated.bismark.cov",
-                              wgbsFiles)]
+#wgbsFiles <- wgbsFiles[!grepl("CD8-Mock-8-69.deduplicated.bismark.cov",
+#                              wgbsFiles)]
 
 # Do the tiling with a given length of BPs
 ################################################################################
