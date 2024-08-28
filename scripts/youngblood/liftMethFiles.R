@@ -103,13 +103,6 @@ compress <- parsed$compress
 outTag <- parsed$outTag
 outDir <- parsed$outDir
 
-inFile <- "/Users/guillem.santamaria/Documents/postdoc/comput/car_t/data/youngblood/GSM5677818_2-1245637.txt.gz"
-chainFile <- "/Users/guillem.santamaria/Documents/postdoc/comput/car_t/data/hg19ToHg38.over.chain.gz"
-reord <- T
-compress <- T
-outTag <- "hg38"
-outDir <- "/Users/guillem.santamaria/Documents/postdoc/comput/car_t/data/youngblood/hg38Conv"
-
 outDir <- addSlashIfNot(outDir)
 createIfNot(outDir)
 
