@@ -17,7 +17,15 @@
 #SBATCH -p batch
 #SBATCH --qos=normal
 
+conda activate r-4.3.1
+
+# Variables for the pipeline
+########################################################################################################################
 tileFile="/home/users/gsantamaria/projects/car_t/results/preprocessing/tile_comb/car_t_comb_100bp_tiled.rds"
 outName="/home/users/gsantamaria/projects/car_t/results/preprocessing/tile_comb/comb_methPerc_man.csv"
 
+# Analysis
+########################################################################################################################
 Rscript getPercMatManual.R "$tileFile" --outName "$outName"
+
+conda deactivate
