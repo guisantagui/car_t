@@ -81,14 +81,6 @@ outDir <- addSlashIfNot(parsed$outDir)
 
 createIfNot(outDir)
 
-# This prevents that in case that the output directory name is not ended by "/"
-# the output name is not generated correctly.
-if(substr(outDir, nchar(outDir), nchar(outDir)) == "/"){
-        sepChar <- ""
-}else{
-        sepChar <- "/"
-}
-
 # Get filenames for COV files
 ################################################################################
 
@@ -103,15 +95,13 @@ wgbsFiles <- wgbsFiles[grepl(".cov.gz",
 # Do the tiling with a given length of BPs
 ################################################################################
 
-MK_tileName <- sprintf("%s%s%s_MK_%sbp_tiled.rds",
+MK_tileName <- sprintf("%s%s_MK_%sbp_tiled.rds",
                        outDir,
-                       sepChar,
                        outName,
                        as.character(tileSize))
 
-MK_tileUnitName <- sprintf("%s%s%s_MK_%sbp_tiledUnited.rds",
+MK_tileUnitName <- sprintf("%s%s_MK_%sbp_tiledUnited.rds",
                            outDir,
-                           sepChar,
                            outName,
                            as.character(tileSize))
 
@@ -130,7 +120,11 @@ if(!file.exists(MK_tileName)){
         # Load Bismark coverage files
         wgbsFiles_list <- as.list(wgbsFiles)
 
-        samps <- gsub("_bismark_bt2_pe", "", gsub("\\..*", "", basename(wgbsFiles)))
+        samps <- gsub("_bismark_bt2_pe",
+                      "",
+                      gsub("\\..*",
+                           "",
+                           basename(wgbsFiles)))
 
         sampList <- as.list(samps)
         print(sprintf("Loading WGBS files from %s...", wgbsDir))
@@ -143,7 +137,8 @@ if(!file.exists(MK_tileName)){
                                    pipeline = "bismarkCoverage",
                                    context = "CpG",
                                    mincov = minCov,
-                                   treatment = as.numeric(!grepl("M", unlist(sampList))))
+                                   treatment = as.numeric(!grepl("M",
+                                                                 unlist(sampList))))
 
         # Do a tile analysis
         nCores <- detectCores() - 2
@@ -203,9 +198,8 @@ rownames(percMat) <- tileNames
 
 percMat <- t(percMat)
 
-percMatName <- sprintf("%s%s%s_%sbp_percMeth.csv",
+percMatName <- sprintf("%s%s_%sbp_percMeth.csv",
                        outDir,
-                       sepChar,
                        outName,
                        as.character(tileSize))
 

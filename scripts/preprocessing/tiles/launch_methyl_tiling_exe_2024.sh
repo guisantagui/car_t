@@ -23,7 +23,7 @@ conda activate r-4.3.1
 ########################################################################################################################
 
 urlsFile="/home/users/gsantamaria/projects/car_t/data/PrjCellEx2024_COV_links.txt"
-wgbsDir="projects/car_t/data/epigen/bismark_res/2024/new/"
+wgbsDir="/home/users/gsantamaria/projects/car_t/data/epigen/bismark_res/2024/new/"
 tileSize=100
 minCov=5
 minCpGs_inTile=5

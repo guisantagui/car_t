@@ -147,7 +147,7 @@ for(j in seq_along(bedFiles)){
                 
                 sampMethPercDF[[i]] <- toBind
         }
-        
+        close(pb)
         sampMethPercDF <- do.call(rbind, sampMethPercDF)
         
         sampMethPercDF$region <- paste(sampMethPercDF$chr,
