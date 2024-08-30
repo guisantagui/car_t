@@ -42,7 +42,7 @@ parsed <- parse_args(parser)
 # a number).
 chrInAutosome <- function(regIDs){
         allChrs <- gsub("\\..*", "", regIDs)
-        isAutosome <- !is.na(suppressWarnings(as.numeric(regIDs)))
+        isAutosome <- !is.na(suppressWarnings(as.numeric(allChrs)))
         regIDs[isAutosome] <- paste0("chr", regIDs[isAutosome])
         return(regIDs)
 }
@@ -79,7 +79,6 @@ createIfNot(outDir)
 ################################################################################
 tiles <- readRDS(tileFile)
 
-
 # Integrate samples
 ################################################################################
 
@@ -94,7 +93,7 @@ allTiles <- lapply(tiles,
 allTiles <- unique(unlist(allTiles))
 
 # Add chr to autosomes
-allTiles<- chrInAutosome(allTiles)
+allTiles <- chrInAutosome(allTiles)
 
 # Obtain the methylation percentage of all tiles in each sample
 print("Integrating tiled samples into a single methylation percentage matrix...")
@@ -126,9 +125,6 @@ for(i in seq_along(tiles)){
         methMat <- rbind.data.frame(methMat, toBind)
 }
 close(pb)
-
-# Integrate the methylation percentages into a single dataset.
-methMat <- do.call(rbind.data.frame, methMat)
 
 writeCsvFst(methMat, file = outName)
 print(sprintf("%s saved at %s.", basename(outName), dirname(outName)))

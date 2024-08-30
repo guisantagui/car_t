@@ -19,7 +19,7 @@
 
 conda activate r-4.3.1
 
-bismFileDir="/home/users/gsantamaria/projects/car_t/data/epigen/bismark_res/2024/new/"
+bismFileDir="/home/users/gsantamaria/projects/car_t/data/epigen/bismark_res/2024/large/"
 lmrFile="/home/users/gsantamaria/projects/car_t/data/d59_d61_d62_M0.hmr"
 minCov=5
 outTag="2024"
